@@ -1,11 +1,17 @@
 # ECMAScript 6 <sup>[git.io/es6features](http://git.io/es6features)</sup>
 
 ## Introduction
-ECMAScript 6 is the upcoming version of the ECMAScript standard.  This standard is targeting ratification in December 2014.  ES6 is a significant update to the language, and the first update to the language since ES5 was standardized in 2009.    Implementation of these features in major JavaScript engines is [underway now](http://kangax.github.io/es5-compat-table/es6/).
+## 導入
+ECMAScript 6 is the upcoming version of the ECMAScript standard.  This standard is targeting ratification in December 2014.  ES6 is a significant update to the language, and the first update to the language since ES5 was standardized in 2009. Implementation of these features in major JavaScript engines is [underway now](http://kangax.github.io/es5-compat-table/es6/).
+
+ECMAScript6（以下、ES6）はECMAScriptの来たる次のバージョンであり、2014年10月に承認されることを目標としています。ES6によりJavaScript言語に多くのアップデートがもたらされ、それはES5が2009年に標準になって以来のことです。主要なJavaScriptエンジンにおけるこれらの実装は[underway now](http://kangax.github.io/es5-compat-table/es6/)にて確認することができます。
 
 See the [draft ES6 standard](https://people.mozilla.org/~jorendorff/es6-draft.html) for full specification of the ECMAScript 6 language.
 
+ECMAScript6の完全な仕様は[draft ES6 standard](https://people.mozilla.org/~jorendorff/es6-draft.html)で確認できます。
+
 ES6 includes the following new features:
+ES6には次のような新しい機能が含まれています。
 - [arrows](#arrows)
 - [classes](#classes)
 - [enhanced object literals](#enhanced-object-literals)
@@ -30,22 +36,26 @@ ES6 includes the following new features:
 - [tail calls](#tail-calls)
 
 ## ECMAScript 6 Features
+## ECMAScript6の新機能
 
 ### Arrows
 Arrows are a function shorthand using the `=>` syntax.  They are syntactically similar to the related feature in C#, Java 8 and CoffeeScript.  They support both expression and statement bodies.  Unlike functions, arrows share the same lexical `this` as their surrounding code.
 
+### Arrows
+Arrowsは関数（function）の省略記法で`=>`を用いて記述します。これはC#、Java8、CoffeeScriptの機能に似たシンタックスです。Arrowsは式（Expression）と命令文（Statement）のどちらでも利用することが可能です。Arrowsにおける`this`は、Arrowsを囲むコードと同じになります。
+
 ```JavaScript
-// Expression bodies
+// 式（Expression）として用いる場合
 var odds = evens.map(v => v + 1);
 var nums = evens.map((v, i) => v + i);
 
-// Statement bodies
+// 命令文（Statement）として用いる場合
 nums.forEach(v => {
   if (v % 5 === 0)
     fives.push(v);
 });
 
-// Lexical this
+// thisの参照先
 var bob = {
   _name: "Bob",
   _friends: [],
