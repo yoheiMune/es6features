@@ -69,6 +69,9 @@ var bob = {
 ### Classes
 ES6 classes are a simple sugar over the prototype-based OO pattern.  Having a single convenient declarative form makes class patterns easier to use, and encourages interoperability.  Classes support prototype-based inheritance, super calls, instance and static methods and constructors.
 
+### Classes
+ES6のClassは、プロトタイプをベースとしたOO（Object Oriented）パターンの上に成り立ちます。宣言型の唯一の型を持つことで、Classをより簡単に利用することができ、相互運用を促進します。Classはプロトタイプベースの継承をサポートしており、親（super）クラスの呼び出しや、インスタンスメソッド・スタティックメソッドやコンストラクタなどの機能を持ちます。
+
 ```JavaScript
 class SkinnedMesh extends THREE.Mesh {
   constructor(geometry, materials) {
@@ -92,18 +95,21 @@ class SkinnedMesh extends THREE.Mesh {
 ### Enhanced Object Literals
 Object literals are extended to support setting the prototype at construction, shorthand for `foo: foo` assignments, defining methods and making super calls.  Together, these also bring object literals and class declarations closer together, and let object-based design benefit from some of the same conveniences.
 
+### Enhanced Object Literals
+Objectリテラルの記述が拡張され、プロトタイプの指定、`foo: foo`の省略記法、メソッドの定義、superの呼び出しを行うことができます。これによりオブジェクトリテラルとクラス定義を近しく記述することができ、オブジェクトベースの設計は同じような便利さを得ることができます。
+
 ```JavaScript
 var obj = {
     // __proto__
     __proto__: theProtoObj,
-    // Shorthand for ‘handler: handler’
+    // ‘handler: handler’の省略記法
     handler,
-    // Methods
+    // メソッド
     toString() {
-     // Super calls
+     // Super呼び出し
      return "d " + super.toString();
     },
-    // Computed (dynamic) property names
+    // ダイナミックなプロパティ名
     [ 'prop_' + (() => 42)() ]: 42
 };
 ```
@@ -111,15 +117,18 @@ var obj = {
 ### Template Strings
 Template strings provide syntactic sugar for constructing strings.  This is similar to string interpolation features in Perl, Python and more.  Optionally, a tag can be added to allow the string construction to be customized, avoiding injection attacks or constructing higher level data structures from string contents.
 
+### Template Strings
+テンプレート文字列（Template Strings）は文字列の構築に役立ちます。これはPerlやPythonなどの文字列挿入の形式に似ています。カスタマイズのために任意でタグを文字列の構築に追加することができ、インジェクション攻撃（injection attack）を防ぎ、文字列コンテンツをより高レベルでデータ構築することができます。
+
 ```JavaScript
-// Basic literal string creation
+// 最も基本的な文字列の指定
 `In JavaScript '\n' is a line-feed.`
 
-// Multiline strings
+// 複数行
 `In JavaScript this is
  not legal.`
 
-// Construct a DOM query
+// DOM queryの構築
 var name = "Bob", time = "today";
 `Hello ${name}, how are you ${time}?`
 
@@ -134,25 +143,28 @@ GET`http://foo.org/bar?a=${a}&b=${b}
 ### Destructuring
 Destructuring allows binding using pattern matching, with support for matching arrays and objects.  Destructuring is fail-soft, similar to standard object lookup `foo["bar"]`, producing `undefined` values when not found.
 
+### Destructuring
+デストラクチャー（Destructuring）はパターンマッチングを用いて、配列やオブジェクトへの値の設定を行うことができます。デストラクチャーはフェールソフト（fail-soft）であり、`foo["bar"]`で対象を探し、もし値が見つからない場合には`undefined`が設定されます。
+
 ```JavaScript
-// list matching
+// 配列への代入
 var [a, , b] = [1,2,3];
 
-// object matching
+// オブジェクトへの代入
 var { op: a, lhs: { op: b }, rhs: c }
        = getASTNode()
 
-// object matching shorthand
+// オブジェクトへの代入（省略記法）
 // binds `op`, `lhs` and `rhs` in scope
 var {op, lhs, rhs} = getASTNode()
 
-// Can be used in parameter position
+// パラメータにも使うことができます
 function g({name: x}) {
   console.log(x);
 }
 g({name: 5})
 
-// Fail-soft destructuring
+// フェールソフトの例
 var [a] = [];
 a === undefined;
 ```
