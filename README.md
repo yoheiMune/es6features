@@ -172,16 +172,19 @@ a === undefined;
 ### Default + Rest + Spread
 Callee-evaluated default parameter values.  Turn an array into consecutive arguments in a function call.  Bind trailing parameters to an array.  Rest replaces the need for `arguments` and addresses common cases more directly.
 
+### Default + Rest + Spread
+関数の引数に初期値を設定できます。関数呼び出しで複数のパラメータを指定する場合に、配列で指定することができます。可変引数が利用可能になりました。Rest replaces the need for `arguments` and addresses common cases more directly.
+
 ```JavaScript
 function f(x, y=12) {
-  // y is 12 if not passed (or passed as undefined)
+  // 第2引数が指定されない場合には、y=12となります
   return x + y;
 }
 f(3) == 15
 ```
 ```JavaScript
 function f(x, ...y) {
-  // y is an Array
+  // yは配列です
   return x * y.length;
 }
 f(3, "hello", true) == 6
@@ -190,7 +193,7 @@ f(3, "hello", true) == 6
 function f(x, y, z) {
   return x + y + z;
 }
-// Pass each elem of array as argument
+// 関数の引数を配列形式で指定しています
 f(...[1,2,3]) == 6
 ```
 
@@ -198,17 +201,20 @@ f(...[1,2,3]) == 6
 Block-scoped binding constructs.  `let` is the new `var`.  `const` is single-assignment.  Static restrictions prevent use before assignment.
 
 
+### Let + Const
+変数宣言の新しい方法です。`let`は`var`の新しい形式で、`const`は一度だけ値を代入することができます。静的な制約を用いることで値代入前に変数を使うことを防ぐことができます。
+
 ```JavaScript
 function f() {
   {
     let x;
     {
-      // okay, block scoped name
+      // OK: 異なるブロックスコープ内の変数
       const x = "sneaky";
-      // error, const
+      // NG: 2度目の代入はダメ
       x = "foo";
     }
-    // error, already declared in block
+    // NG: 既に同一ブロック内で定義済み
     let x = "inner";
   }
 }
@@ -216,6 +222,9 @@ function f() {
 
 ### Iterators + For..Of
 Iterator objects enable custom iteration like CLR IEnumerable or Java Iteratable.  Generalize `for..in` to custom iterator-based iteration with `for..of`.  Don’t require realizing an array, enabling lazy design patterns like LINQ.
+
+### Iterators + For..Of
+イテレーターオブジェクト（Iterator Object）はCLRのIEnumberableやJavaのIterableのような、イテレーションを提供します。`for..in`をイテレーションベースにしたものが`for..of`です。配列か否かを気にする必要はなく、LINQなどの遅延デザインパターン（Lazy Design Pattern）を利用することができます。
 
 ```JavaScript
 let fibonacci = {
@@ -231,7 +240,7 @@ let fibonacci = {
 }
 
 for (var n of fibonacci) {
-  // truncate the sequence at 1000
+  // 1000で終わり
   if (n > 1000)
     break;
   print(n);
@@ -239,6 +248,9 @@ for (var n of fibonacci) {
 ```
 
 Iteration is based on these duck-typed interfaces (using [TypeScript](http://typescriptlang.org) type syntax for exposition only):
+
+Iterationは次のようなダックタイピングなインターフェースを元にしています（using [TypeScript](http://typescriptlang.org) type syntax for exposition only）。
+
 ```TypeScript
 interface IteratorResult {
   done: boolean;
@@ -255,7 +267,12 @@ interface Iterable {
 ### Generators
 Generators simplify iterator-authoring using `function*` and `yield`.  A function declared as function* returns a Generator instance.  Generators are subtypes of iterators which include additional  `next` and `throw`.  These enable values to flow back into the generator, so `yield` is an expression form which returns a value (or throws).
 
+### Generators
+ジェネレーター（Generator）は`function*`と`yield`を用いて、イテレーターの扱いをシンプルにします。`function*`で宣言された関数はジェネレーターのインスタンスを返却します。ジェネレーターはイテレーターのサブタイプであり、`next`と`throw`の機能を追加で保持しています。これらを用いることで値を一連で扱うことができます。`yeild`は返却される値（またはthrowされる値）を表します。
+
 Note: Can also be used to enable ‘await’-like async programming, see also ES7 `await` proposal.
+
+注意：`await`のような非同期プログラミングも利用することができます。詳しくはES7の`await`の提案を参照のこと。
 
 ```JavaScript
 var fibonacci = {
@@ -280,6 +297,8 @@ for (var n of fibonacci) {
 
 The generator interface is (using [TypeScript](http://typescriptlang.org) type syntax for exposition only):
 
+ジェネレーターのインターフェースは次の通りです（using [TypeScript](http://typescriptlang.org) type syntax for exposition only）。
+
 ```TypeScript
 interface Generator extends Iterator {
     next(value?: any): IteratorResult;
@@ -290,15 +309,18 @@ interface Generator extends Iterator {
 ### Comprehensions
 Array and generator comprehensions provide simple declarative list processing similar as used in many functional programming patterns.
 
+### Comprehensions
+配列やジェネレータなどのデータ構造はシンプルな宣言的なリスト機能を提供し、それらは多くの関数型プログラミングのパターンにおいて似たように利用されます。
+
 ```JavaScript
-// Array comprehensions
+// 配列
 var results = [
   for(c of customers)
     if (c.city == "Seattle")
       { name: c.name, age: c.age }
 ]
 
-// Generator comprehensions
+// ジェネレーター
 var results = (
   for(c of customers)
     if (c.city == "Seattle")
@@ -309,20 +331,23 @@ var results = (
 ### Unicode
 Non-breaking additions to support full Unicode, including new unicode literal form in strings and new RegExp `u` mode to handle code points, as well as new APIs to process strings at the 21bit code points level.  These additions support building global apps in JavaScript.
 
+### Unicode
+Unicodeがサポートされ、その中には新しいUnicodeの文字が含まれます。正規表現（RegExp）で`u`モードを用いることで扱うことができ、それは21ビットコードポイントレベルの処理を行う新しいAPIと同様です。このサポートによりJavaScriptをグローバルなアプリケーションに利用する手助けとなります。
+
 ```JavaScript
-// same as ES5.1
+// ES5.1と同じ
 "𠮷".length == 2
 
-// new RegExp behaviour, opt-in ‘u’
+// 新しい世紀表現の利用方法（‘u’の利用）
 "𠮷".match(/./u)[0].length == 2
 
-// new form
+// 新しい定義方法
 "\u{20BB7}"=="𠮷"=="\uD842\uDFB7"
 
-// new String ops
+// コードポイント
 "𠮷".codePointAt(0) == 0x20BB7
 
-// for-of iterates code points
+// コードポイントによるfor..ofの利用
 for(var c of "𠮷") {
   console.log(c);
 }
@@ -330,6 +355,9 @@ for(var c of "𠮷") {
 
 ### Modules
 Language-level support for modules for component definition.  Codifies patterns from popular JavaScript module loaders (AMD, CommonJS). Runtime behaviour defined by a host-defined default loader.  Implicitly async model – no code executes until requested modules are available and processed.
+
+### Modules
+言語レベルでコンポーネント定義を行うことのできるmoduleがサポートされます。一般的なJavaScriptモジュールローダー（AMDやCommonJSなど）により体系化されたパターンを利用します。ランタイムの振る舞いは、ホストが定義しているデフォルトローダーによって定義されます。これは暗黙的な非同期モデルで、モジュールとして呼び出されたコードはそれが呼び出されるまで、実行されません。
 
 ```JavaScript
 // lib/math.js
@@ -350,6 +378,8 @@ alert("2π = " + sum(pi, pi));
 ```
 
 Some additional features include `export default` and `export *`:
+
+`export default`や`export *`などの機能もあります。
 
 ```JavaScript
 // lib/mathplusplus.js
@@ -374,10 +404,20 @@ Module loaders support:
 - Compilation hooks
 - Nested virtualization
 
+### Module Loaders
+モジュールローダーサポート:
+- ダイナミックローディング（Dynamic Loading）
+- 状態の独立（State Isolation）
+- グローバル名前空間の独立（Global Namespace Isolation）
+- コンパイルフック（Compilation Hooks）
+- ネスト化された仮想化（Nested Virtualization）
+
 The default module loader can be configured, and new loaders can be constructed to evaluated and load code in isolated or constrained contexts.
 
+デフォルトモジュールローダーを設定することが可能です。新しいローダーによって独立したコード（またはコンテキストを指定したコード）を構築することができます。
+
 ```JavaScript
-// Dynamic loading – ‘System’ is default loader
+// ダイナミックロードディング – ‘System’はデフォルトローダー
 System.import('lib/math').then(function(m) {
   alert("2π = " + m.sum(m.pi, m.pi));
 });
@@ -396,25 +436,28 @@ System.set('jquery', Module({$: $})); // WARNING: not yet finalized
 ### Map + Set + WeakMap + WeakSet
 Efficient data structures for common algorithms.  WeakMaps provides leak-free object-key’d side tables.
 
+### Map + Set + WeakMap + WeakSet
+多くのアルゴリズムで有益なデータ構造がサポートされます。WeakMapはメモリリークフリーなKey-Value構造を提供します。
+
 ```JavaScript
-// Sets
+// Set
 var s = new Set();
 s.add("hello").add("goodbye").add("hello");
 s.size === 2;
 s.has("hello") === true;
 
-// Maps
+// Map
 var m = new Map();
 m.set("hello", 42);
 m.set(s, 34);
 m.get(s) == 34;
 
-// Weak Maps
+// Weak Map
 var wm = new WeakMap();
 wm.set(s, { extra: 42 });
 wm.size === undefined
 
-// Weak Sets
+// Weak Set
 var ws = new WeakSet();
 ws.add({ data: 42 });
 // Because the added object has no other references, it will not be held in the set
@@ -422,6 +465,9 @@ ws.add({ data: 42 });
 
 ### Proxies
 Proxies enable creation of objects with the full range of behaviors available to host objects.  Can be used for interception, object virtualization, logging/profiling, etc.
+
+### Proxies
+プロキシ（Proxy）を用いることで、ホストオブジェクト（host object）に対して柔軟な振る舞いを設定することができます。処理の割り込みをしたり、オブジェクトの仮想化を行ったり、ロギングやプロファイリングを行うことができます。
 
 ```JavaScript
 // Proxying a normal object
