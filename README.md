@@ -32,10 +32,7 @@ ECMAScript6には次のような新機能が含まれています。
 ## ECMAScript6の新機能
 
 ### Arrows
-Arrows are a function shorthand using the `=>` syntax.  They are syntactically similar to the related feature in C#, Java 8 and CoffeeScript.  They support both expression and statement bodies.  Unlike functions, arrows share the same lexical `this` as their surrounding code.
-
-### Arrows
-Arrowsは関数（function）の省略記法で`=>`を用いて記述します。これはC#、Java8、CoffeeScriptの機能に似たシンタックスです。Arrowsは式（Expression）と命令文（Statement）のどちらでも利用することが可能です。Arrowsにおける`this`は、Arrowsを囲むコードと同じになります。
+アロー関数（Arrow）は関数（Function）の省略記法で`=>`を用いて記述します。これはC#、Java8、CoffeeScriptの機能と似たシンタックスです。アロー関数は式（Expression）と命令文（Statement）のどちらでも利用可能です。また、アロー関数内での`this`は通常の関数とは異なります（詳細は以下の例を参照）。
 
 ```JavaScript
 // 式（Expression）として用いる場合
@@ -49,13 +46,20 @@ nums.forEach(v => {
 });
 
 // thisの参照先
-var bob = {
-  _name: "Bob",
-  _friends: [],
-  printFriends() {
-    this._friends.forEach(f =>
-      console.log(this._name + " knows " + f));
-  }
+function Person () {
+  this.age = 0;
+  setInterval(function () {
+    //「this = window」になるので意図しない動きになる
+    console.log(this.age++);
+  }, 1000);
+}
+
+function Person () {
+  this.age = 0;
+  setInterval(() => {
+    // thisはPersonを指すため、意図した動きになる
+    console.log(this.age++);
+  }, 1000);
 }
 ```
 
