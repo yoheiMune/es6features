@@ -32,14 +32,14 @@ ECMAScript6には次のような新機能が含まれています。
 ## ECMAScript6の新機能
 
 ### Arrows
-アロー関数（Arrow）は関数（Function）の省略記法で`=>`を用いて記述します。これはC#、Java8、CoffeeScriptの機能と似たシンタックスです。アロー関数は式（Expression）と命令文（Statement）のどちらでも利用可能です。また、アロー関数内での`this`は通常の関数とは異なります（詳細は以下の例を参照）。
+アロー関数（Arrow）は関数の省略記法で`=>`を用いて記述します。これはC#、Java8、CoffeeScriptの機能と似たシンタックスです。アロー関数は1行の式（Expression）としても利用できますし、波括弧`{}`を用いて複数行のステートメント（Statement）としても利用することができます。また、アロー関数内での`this`は通常の関数とは異なります（詳細は以下の例を参照）。
 
 ```JavaScript
-// 式（Expression）として用いる場合
+// 1行で用いる場合
 var odds = evens.map(v => v + 1);
 var nums = evens.map((v, i) => v + i);
 
-// 命令文（Statement）として用いる場合
+// 複数行で用いる場合
 nums.forEach(v => {
   if (v % 5 === 0)
     fives.push(v);
