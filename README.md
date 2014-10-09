@@ -1,41 +1,34 @@
 # ECMAScript 6 <sup>[git.io/es6features](http://git.io/es6features)</sup>
 
-## Introduction
 ## 導入
-ECMAScript 6 is the upcoming version of the ECMAScript standard.  This standard is targeting ratification in December 2014.  ES6 is a significant update to the language, and the first update to the language since ES5 was standardized in 2009. Implementation of these features in major JavaScript engines is [underway now](http://kangax.github.io/es5-compat-table/es6/).
+ECMAScript6（ES6）はECMAScriptスタンダードの次期バージョンであり、2014年10月の承認を目指しています。ES6によって多くのアップデートがJavaScript言語にもたらさます。このような大きな変更は、ES5が2009年に標準になって以来のことです。主要なJavaScriptエンジンにおけるES6の実装状況は[underway now](http://kangax.github.io/es5-compat-table/es6/)を参照してください。
 
-ECMAScript6（以下、ES6）はECMAScriptの来たる次のバージョンであり、2014年10月に承認されることを目標としています。ES6によりJavaScript言語に多くのアップデートがもたらされ、それはES5が2009年に標準になって以来のことです。主要なJavaScriptエンジンにおけるこれらの実装は[underway now](http://kangax.github.io/es5-compat-table/es6/)にて確認することができます。
+ECMAScript6の詳細仕様は[draft ES6 standard](https://people.mozilla.org/~jorendorff/es6-draft.html)で公開されています。
 
-See the [draft ES6 standard](https://people.mozilla.org/~jorendorff/es6-draft.html) for full specification of the ECMAScript 6 language.
+ECMAScript6には次のような新機能が含まれています。
+- [Arrows](#arrows)
+- [Classes](#classes)
+- [Enhanced Object Literals](#enhanced-object-literals)
+- [Template Strings](#template-strings)
+- [Destructuring](#destructuring)
+- [Default + Rest + Spread](#default--rest--spread)
+- [Let + Const](#let--const)
+- [Iterators + For..of](#iterators--forof)
+- [Generators](#generators)
+- [Comprehensions](#comprehensions)
+- [Unicode](#unicode)
+- [Modules](#modules)
+- [Module Loaders](#module-loaders)
+- [Map + Set + Weakmap + Weakset](#map--set--weakmap--weakset)
+- [Proxies](#proxies)
+- [Symbols](#symbols)
+- [Subclassable Built-ins](#subclassable-built-ins)
+- [Math + Number + String + Object APIs](#math--number--string--object-apis)
+- [Binary and Octal Literals](#binary-and-octal-literals)
+- [Promises](#promises)
+- [Reflect API](#reflect-api)
+- [Tail Calls](#tail-calls)
 
-ECMAScript6の完全な仕様は[draft ES6 standard](https://people.mozilla.org/~jorendorff/es6-draft.html)で確認できます。
-
-ES6 includes the following new features:
-ES6には次のような新しい機能が含まれています。
-- [arrows](#arrows)
-- [classes](#classes)
-- [enhanced object literals](#enhanced-object-literals)
-- [template strings](#template-strings)
-- [destructuring](#destructuring)
-- [default + rest + spread](#default--rest--spread)
-- [let + const](#let--const)
-- [iterators + for..of](#iterators--forof)
-- [generators](#generators)
-- [comprehensions](#comprehensions)
-- [unicode](#unicode)
-- [modules](#modules)
-- [module loaders](#module-loaders)
-- [map + set + weakmap + weakset](#map--set--weakmap--weakset)
-- [proxies](#proxies)
-- [symbols](#symbols)
-- [subclassable built-ins](#subclassable-built-ins)
-- [promises](#promises)
-- [math + number + string + object APIs](#math--number--string--object-apis)
-- [binary and octal literals](#binary-and-octal-literals)
-- [reflect api](#reflect-api)
-- [tail calls](#tail-calls)
-
-## ECMAScript 6 Features
 ## ECMAScript6の新機能
 
 ### Arrows
