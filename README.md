@@ -520,6 +520,9 @@ var handler =
 ### Symbols
 Symbols enable access control for object state.  Symbols allow properties to be keyed by either `string` (as in ES5) or `symbol`.  Symbols are a new primitive type. Optional `name` parameter used in debugging - but is not part of identity.  Symbols are unique (like gensym), but not private since they are exposed via reflection features like `Object.getOwnPropertySymbols`.
 
+### Symbols
+シンボル（Symbol）はオブジェクトの状態コントロールにアクセスすることを可能にします。シンボルのプロパティには`string（ES5）でも`symbol`でもどちらも取ることができます。シンボルは新しいプリミティブ型です。オプションで`name`プロパティを設定することができデバッグに利用できます（が一意である保証はありません）。シンボルは（gensymのように）固有のものですが、`Object.getOwnPropertySymbols`などの機能を通してシンボルは公開されるので、プライベートではありません。
+
 
 ```JavaScript
 (function() {
@@ -546,14 +549,23 @@ c["key"] === undefined
 ### Subclassable Built-ins
 In ES6, built-ins like `Array`, `Date` and DOM `Element`s can be subclassed.
 
+### Subclassable Built-ins
+ES6では`Array`、`Date`、DOM `Element`といった組み込みクラスのサブクラスを作成することができます。
+
 Object construction for a function named `Ctor` now uses two-phases (both virtually dispatched):
 - Call `Ctor[@@create]` to allocate the object, installing any special behavior
 - Invoke constructor on new instance to initialize
 
+`Ctor`という名前の関数を使ってオブジェクトを生成します。現在は以下２つのステップを行います（以下どちらも仮想的にはディスパッティされています）
+- `Ctor[@@create]`を呼び出しオブジェクトの割り当てを行い、独自の振る舞いを定義します。
+- コンストラクターを呼び出し、新しいインスタンスを生成します。
+
 The known `@@create` symbol is available via `Symbol.create`.  Built-ins now expose their `@@create` explicitly.
 
+`@@create`シンボルは、`Symbol.create`を用いて利用することができます。ビルドインクラスは`@@create`を公開しています。
+
 ```JavaScript
-// Pseudo-code of Array
+// Arrayクラス（擬似的に再現しています）
 class Array {
     constructor(...args) { /* ... */ }
     static [Symbol.create]() {
@@ -562,7 +574,7 @@ class Array {
     }
 }
 
-// User code of Array subclass
+// Arrayクラスの独自サブクラス
 class MyArray extends Array {
     constructor(...args) { super(...args); }
 }
@@ -577,6 +589,9 @@ arr.length == 2
 
 ### Math + Number + String + Object APIs
 Many new library additions, including core Math libraries, Array conversion helpers, and Object.assign for copying.
+
+### Math + Number + String + Object APIs
+Mathライブラリ、Arrayを扱うヘルパー、などの様々な機能が追加され、またコピーのためのObject.assignも追加されました。
 
 ```JavaScript
 Number.EPSILON
@@ -604,6 +619,9 @@ Object.assign(Point, { origin: new Point(0,0) })
 ### Binary and Octal Literals
 Two new numeric literal forms are addded for binary (`b`) and octal (`o`).
 
+### Binary and Octal Literals
+数値の表現に、`b`を用いたバイナリー記述と`o`を用いた8進数の記述が新たに加わりました。
+
 ```JavaScript
 0b111110111 === 503 // true
 0o767 === 503 // true
@@ -611,6 +629,9 @@ Two new numeric literal forms are addded for binary (`b`) and octal (`o`).
 
 ### Promises
 Promises are a library for asynchronous programming.  Promises are a first class representation of a value that may be made available in the future.  Promises are used in many existing JavaScript libraries.
+
+### Promises
+Promiseは非同期プログラミングを行うためのライブラリです。Promiseを用いることで将来利用可能となる値を表現することができます。Promiseは既に多くのJavaScriptライブラリで利用されています。
 
 ```JavaScript
 function timeout(duration = 0) {
@@ -631,12 +652,19 @@ var p = timeout(1000).then(() => {
 ### Reflect API
 Full reflection API exposing the runtime-level meta-operations on objects.  This is effectively the inverse of the Proxy API, and allows making calls corresponding to the same meta-operations as the proxy traps.  Especially useful for implementing proxies.
 
+### Reflect API
+リフレクションAPI（Reflection API）は実行時にオブジェクトのメタ操作を行うことができます。これはProxy APIとは逆のことを提供するものであり、Proxyトラップと同じようなメタ操作に対応する呼び出しを行うことができます。特にProxyを実装する際に有効です。
+
 ```JavaScript
 // No sample yet
 ```
 
 ### Tail Calls
 Calls in tail-position are guaranteed to not grow the stack unboundedly.  Makes recursive algorithms safe in the face of unbounded inputs.
+
+### Tail Calls
+テールコール（Tail Call）は上限なきスタックの増加を防ぐことができます。制御しきれないような大きな入力を受け付けた場合にも、再帰呼び出しアルゴリズムを正常に動作させることができます。
+
 
 ```JavaScript
 function factorial(n, acc = 1) {
@@ -645,7 +673,7 @@ function factorial(n, acc = 1) {
     return factorial(n - 1, n * acc);
 }
 
-// Stack overflow in most implementations today,
-// but safe on arbitrary inputs in eS6
+// 現在のほとんどの実装系ではスタックオーバーフロー（Stack Overflow）が発生します
+// しかし、ES6ではそれが発生しません
 factorial(100000)
 ```
