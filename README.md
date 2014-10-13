@@ -64,27 +64,28 @@ function Person () {
 ```
 
 ### Classes
-ES6 classes are a simple sugar over the prototype-based OO pattern.  Having a single convenient declarative form makes class patterns easier to use, and encourages interoperability.  Classes support prototype-based inheritance, super calls, instance and static methods and constructors.
-
-### Classes
-ES6のClassは、プロトタイプをベースとしたOO（Object Oriented）パターンの上に成り立ちます。宣言型の唯一の型を持つことで、Classをより簡単に利用することができ、相互運用を促進します。Classはプロトタイプベースの継承をサポートしており、親（super）クラスの呼び出しや、インスタンスメソッド・スタティックメソッドやコンストラクタなどの機能を持ちます。
+クラス（Class）はプロトタイプをベースとしていて、オブジェクト指向パターンの上に成り立っています。宣言的な型を独自に定義することでクラスパターンをより利用しやすくなり、また相互運用可能性を促進します。Classはプロトタイプベースの継承をサポートしており、親（super）クラスの呼び出しや、インスタンスメソッド・スタティックメソッドやコンストラクタなどの機能を提供します。
 
 ```JavaScript
-class SkinnedMesh extends THREE.Mesh {
-  constructor(geometry, materials) {
-    super(geometry, materials);
+class Animal {
+  constructor() {
+    this.id = 'id-' + new Date().getTime();
+  }
+  walk () {
+    console.log('an animal is walking...');
+  }
+  static getInstance () {
+    return new Animal();
+  }
+}
 
-    this.idMatrix = SkinnedMesh.defaultMatrix();
-    this.bones = [];
-    this.boneMatrices = [];
-    //...
+class Dog extends Animal {
+  constructor(name) {
+    super();
+    this.name = name;
   }
-  update(camera) {
-    //...
-    super.update();
-  }
-  static defaultMatrix() {
-    return new THREE.Matrix4();
+  walk () {
+    console.log(this.name + ' is walking...');
   }
 }
 ```

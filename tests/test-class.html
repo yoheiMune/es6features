@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>Hello World!</title>
+    <script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+    <script src="https://google.github.io/traceur-compiler/src/bootstrap.js"></script>
+    <script>
+      traceur.options.experimental = true;
+    </script>
+    <script type="module">
+        class Animal {
+          constructor() {
+            this.id = 'id-' + new Date().getTime();
+          }
+          walk () {
+            console.log('an animal is walking...');
+          }
+          static getInstance () {
+            return new Animal();
+          }
+        }
+
+        class Dog extends Animal {
+          constructor(name) {
+            super();
+            this.name = name;
+          }
+          walk () {
+            console.log(this.name + ' is walking...');
+          }
+        }
+
+        var dog = new Dog('myPuppy');
+        console.debug(dog.id);
+        dog.walk();
+    </script>
+  </head> 
+  <body>
+    <h1 id="message"></h1>
+  </body> 
+</html>
