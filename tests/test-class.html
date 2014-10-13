@@ -30,9 +30,14 @@
           }
         }
 
+        // test1 - normal case.
         var dog = new Dog('myPuppy');
         console.debug(dog.id);
         dog.walk();
+
+        // test2 - test for static methods.
+        var animal = Animal.getInstance();
+        console.debug(animal.id);
     </script>
   </head> 
   <body>
