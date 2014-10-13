@@ -32,7 +32,7 @@ ECMAScript6には次のような新機能が含まれています。
 ## ECMAScript6の新機能
 
 ### Arrows
-アロー関数（Arrow）は関数の省略記法で`=>`を用いて記述します。これはC#、Java8、CoffeeScriptの機能と似たシンタックスです。アロー関数は1行の式（Expression）としても利用できますし、波括弧`{}`を用いて複数行のステートメント（Statement）としても利用することができます。また、アロー関数内での`this`は通常の関数とは異なります（詳細は以下の例を参照）。
+アロー関数（Arrow Function）は関数の省略記法で`=>`を用いて記述します。これはC#、Java8、CoffeeScriptの機能と似たシンタックスです。アロー関数は1行の式（Expression）としても利用できますし、波括弧`{}`を用いて複数行のステートメント（Statement）としても利用することができます。また、アロー関数内での`this`は通常の関数とは異なります（詳細は以下の例を参照）。
 
 ```JavaScript
 // 1行で用いる場合
@@ -91,25 +91,27 @@ class Dog extends Animal {
 ```
 
 ### Enhanced Object Literals
-Object literals are extended to support setting the prototype at construction, shorthand for `foo: foo` assignments, defining methods and making super calls.  Together, these also bring object literals and class declarations closer together, and let object-based design benefit from some of the same conveniences.
-
-### Enhanced Object Literals
-Objectリテラルの記述が拡張され、プロトタイプの指定、`foo: foo`の省略記法、メソッドの定義、superの呼び出しを行うことができます。これによりオブジェクトリテラルとクラス定義を近しく記述することができ、オブジェクトベースの設計は同じような便利さを得ることができます。
+オブジェクトリテラルの記述が拡張され、プロトタイプの指定、`foo: foo`の省略記法、メソッドの定義、superの呼び出しを行うことができるようになりました。これによりオブジェクトリテラルとクラス定義をより近しいものとすることができ、同じ機能を持つ異なるものにおいて、オブジェクトベースデザインの利点を享受することができます。
 
 ```JavaScript
-var obj = {
-    // __proto__
+function createObject (name) {
+  return {
+    // プロトタイプの指定
     __proto__: theProtoObj,
-    // ‘handler: handler’の省略記法
-    handler,
-    // メソッド
+    // プロパティの省略定義
+    name,
+    // メソッド定義
     toString() {
      // Super呼び出し
-     return "d " + super.toString();
+     // TODO super.xxx in a object literal doesn't work.
+     // return "d " + super.toString();
     },
     // ダイナミックなプロパティ名
     [ 'prop_' + (() => 42)() ]: 42
-};
+  }
+}
+var obj = createObject('foo');
+console.log(obj.name); // foo
 ```
 
 ### Template Strings

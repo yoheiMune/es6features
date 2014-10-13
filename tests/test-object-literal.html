@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <title>Hello World!</title>
+    <script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+    <script src="https://google.github.io/traceur-compiler/src/bootstrap.js"></script>
+    <script>
+      traceur.options.experimental = true;
+    </script>
+    <script type="module">
+      function createObject (name) {
+        var protoObject = {
+          toString() {
+            return 'protoObject.toString';
+          }
+        };
+        var object = protoObject <| {
+          // プロトタイプの指定
+          __proto__: {say: function () {console.log('hello')}},
+          // プロパティの省略定義
+          name,
+          // メソッド定義
+          toString() {
+           // Super呼び出し
+           return "d " + super.toString();
+          },
+          // ダイナミックなプロパティ名
+          [ 'prop_' + (() => 42)() ]: 42
+        };
+        return object;
+      }
+      var obj = createObject('foo');
+      console.log(obj.name); // 'foo'
+      // console.log(obj.toString()); // TODO not work.
+    </script>
+  </head> 
+  <body>
+  </body> 
+</html>
