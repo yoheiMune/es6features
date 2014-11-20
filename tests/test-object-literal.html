@@ -9,12 +9,7 @@
     </script>
     <script type="module">
       function createObject (name) {
-        var protoObject = {
-          toString() {
-            return 'protoObject.toString';
-          }
-        };
-        var object = protoObject <| {
+        var object = {
           // プロトタイプの指定
           __proto__: {say: function () {console.log('hello')}},
           // プロパティの省略定義
