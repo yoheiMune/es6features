@@ -115,10 +115,7 @@ console.log(obj.name); // foo
 ```
 
 ### Template Strings
-Template strings provide syntactic sugar for constructing strings.  This is similar to string interpolation features in Perl, Python and more.  Optionally, a tag can be added to allow the string construction to be customized, avoiding injection attacks or constructing higher level data structures from string contents.
-
-### Template Strings
-テンプレート文字列（Template Strings）は文字列の構築に役立ちます。これはPerlやPythonなどの文字列挿入の形式に似ています。カスタマイズのために任意でタグを文字列の構築に追加することができ、インジェクション攻撃（injection attack）を防ぎ、文字列コンテンツをより高レベルでデータ構築することができます。
+テンプレート文字列（Template Strings）は文字列の構築に役立ちます。これはPerlやPythonなどの文字列挿入の形式に似ています。カスタマイズのために任意でタグを文字列の構築に追加することができるため、インジェクション攻撃（injection attack）を防げたり、文字列の組み立てをより簡単に行うことができます。
 
 ```JavaScript
 // 最も基本的な文字列の指定
@@ -132,7 +129,7 @@ Template strings provide syntactic sugar for constructing strings.  This is simi
 var name = "Bob", time = "today";
 `Hello ${name}, how are you ${time}?`
 
-// Construct an HTTP request prefix is used to interpret the replacements and construction
+// HTTPリクエストを構築する例
 GET`http://foo.org/bar?a=${a}&b=${b}
     Content-Type: application/json
     X-Credentials: ${credentials}
@@ -144,7 +141,7 @@ GET`http://foo.org/bar?a=${a}&b=${b}
 Destructuring allows binding using pattern matching, with support for matching arrays and objects.  Destructuring is fail-soft, similar to standard object lookup `foo["bar"]`, producing `undefined` values when not found.
 
 ### Destructuring
-デストラクチャー（Destructuring）はパターンマッチングを用いて、配列やオブジェクトへの値の設定を行うことができます。デストラクチャーはフェールソフト（fail-soft）であり、`foo["bar"]`で対象を探し、もし値が見つからない場合には`undefined`が設定されます。
+デストラクチャー（Destructuring）はパターンマッチングを用いて、配列やオブジェクトに値を設定することができます。デストラクチャーはフェールソフト（fail-soft）な実装であり、例えば`foo["bar"]`で対象を探し、もし値が見つからない場合には`undefined`が設定されます。
 
 ```JavaScript
 // 配列への代入
@@ -155,7 +152,6 @@ var { op: a, lhs: { op: b }, rhs: c }
        = getASTNode()
 
 // オブジェクトへの代入（省略記法）
-// binds `op`, `lhs` and `rhs` in scope
 var {op, lhs, rhs} = getASTNode()
 
 // パラメータにも使うことができます
