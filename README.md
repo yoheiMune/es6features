@@ -136,6 +136,7 @@ GET`http://foo.org/bar?a=${a}&b=${b}
     { "foo": ${foo},
       "bar": ${bar}}`(myOnReadyStateChangeHandler);
 ```
+仕様：[#sec-template-literals](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-template-literals)  
 参考：[Template Strings | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings)  
 Support：FF34+
 
