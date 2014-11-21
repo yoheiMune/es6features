@@ -136,6 +136,8 @@ GET`http://foo.org/bar?a=${a}&b=${b}
     { "foo": ${foo},
       "bar": ${bar}}`(myOnReadyStateChangeHandler);
 ```
+参考：[Template Strings | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings)
+
 
 ### Destructuring
 Destructuring allows binding using pattern matching, with support for matching arrays and objects.  Destructuring is fail-soft, similar to standard object lookup `foo["bar"]`, producing `undefined` values when not found.
