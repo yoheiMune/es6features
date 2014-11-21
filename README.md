@@ -137,6 +137,8 @@ GET`http://foo.org/bar?a=${a}&b=${b}
       "bar": ${bar}}`(myOnReadyStateChangeHandler);
 ```
 参考：[Template Strings | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings)
+Support：FF34+
+
 
 
 ### Destructuring
